@@ -1,0 +1,6 @@
+[
+  {"type":"order","id":1,"side":"S","price_cents":1000,"qty":300},
+  {"type":"order","id":2,"side":"S","price_cents":1000,"qty":400},
+  {"type":"order","id":3,"side":"S","price_cents":1001,"qty":500},
+  {"type":"order","id":4,"side":"B","price_cents":1001,"qty":600}
+]

@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第三节实践课｜实验明细与技术说明</title>
+<style>
+:root{color-scheme:light;--ink:#183746;--muted:#58707c;--line:#d9e3e7;--blue:#487a95;--orange:#b6743c;--paper:#f5f8f9}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.8 system-ui,"Microsoft YaHei",sans-serif}a{color:#206b88}main{max-width:1140px;margin:auto;padding:36px 28px 80px}header{background:#173e50;color:#fff;padding:50px max(28px,calc((100vw - 1084px)/2)) 42px}header .eyebrow{color:#b7d3df;font-size:14px;letter-spacing:2px}h1{font-size:38px;line-height:1.4;margin:16px 0}header p{color:#d3e3eb;max-width:800px}h2{font-size:27px;margin:0 0 18px;line-height:1.5}h3{font-size:20px;margin:26px 0 12px}p{margin:12px 0}section{margin:0 0 34px;background:#fff;padding:30px 34px;border:1px solid var(--line);border-radius:12px}nav{display:flex;flex-wrap:wrap;gap:8px 22px;margin-bottom:30px}nav a{text-decoration:none}code{font-size:.9em;background:#edf3f5;padding:2px 5px;border-radius:4px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#eff4f6;padding:18px;border-radius:6px;font:14px/1.7 Consolas,monospace}.intro{font-size:18px}.small{font-size:14px;color:var(--muted)}.tag{font-size:13px;letter-spacing:1px;color:var(--muted);margin-bottom:10px}.note{border-left:4px solid var(--blue);padding:6px 18px;margin:20px 0;background:#f2f7fa}.warning{border-left-color:var(--orange);background:#fbf6f0}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin:24px 0}.metric strong{display:block;font-size:30px;font-weight:600;line-height:1.4}.metric span{font-size:14px;color:var(--muted)}.figure{display:block;width:100%;height:auto;margin:20px 0}.table-wrap{overflow-x:auto}table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums;margin:16px 0;font-size:14px}th,td{text-align:left;border-bottom:1px solid var(--line);padding:10px 12px;vertical-align:top}th{background:#f0f5f7;font-weight:600}.cols{display:grid;grid-template-columns:1fr 1fr;gap:26px}.controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:18px 0}button,select,input{font:inherit}button,select{padding:8px 14px;border:1px solid #aebfc6;border-radius:6px;background:#fff;color:var(--ink)}button{cursor:pointer}button:hover{background:#eaf2f5}button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #6aa5be;outline-offset:3px}input[type=range]{flex:1;min-width:150px;accent-color:var(--blue)}.book-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}.depth table{margin:8px 0}.depth td{padding:4px 8px}.qty{position:relative;text-align:right;min-width:90px}.qty span{position:relative;z-index:1}.bar{position:absolute;inset:3px 0 3px auto;opacity:.18;background:var(--blue)}.sell .bar{background:var(--orange)}.status{font-size:14px;padding:10px 0;color:var(--muted)}.ok{color:#23735e}.diff{color:#9a5d2b}details{border-top:1px solid var(--line);padding:14px 0}summary{cursor:pointer;font-weight:600}ol,ul{padding-left:24px}li{margin:8px 0}footer{color:var(--muted);font-size:14px}blockquote{margin:12px 0;padding:8px 18px;border-left:3px solid var(--line)}.cost-value{font-size:24px;font-variant-numeric:tabular-nums}.formula{font-family:Consolas,monospace;padding:12px 16px;background:#f3f6f7;overflow-wrap:anywhere}
+@media(max-width:700px){main{padding:24px 12px 50px}header{padding:28px 22px}h1{font-size:28px}h2{font-size:23px}section{padding:22px 18px}.cols,.book-grid{grid-template-columns:1fr}.metrics{grid-template-columns:1fr;gap:14px}.metric strong{display:inline;font-size:25px;margin-right:12px}th,td{padding:8px}body{font-size:15px}}
+@media print{body{background:#fff;font-size:11pt}header{background:#fff;color:#183746;padding:20px}header p,header .eyebrow{color:#58707c}main{padding:0}section{break-inside:auto;border:0;border-top:1px solid #ddd;padding:18px 0}.controls,nav{display:none}.figure{max-height:240px;object-fit:contain}h2,h3{break-after:avoid}.table-wrap{overflow:visible}}
+</style></head>
+<body>
+<header><div class="eyebrow">当代量化交易系统原理与实现 · 第三节实践课</div>
+<h1>实验明细与技术说明</h1>
+<p>学习讲义 + 可复现实验报告 · 数据日期 2026-09-23 · 整理日期 2026-10-15<br>先看懂一笔订单如何成交，再用真实数据检验自己的理解。</p></header>
+<main>
+<p><a href="report.html">← 返回简明学习讲义：一笔股票买卖是怎么发生的？</a></p>
+<nav aria-label="报告目录"><a href="#start">学习路线</a><a href="#basics">交易基础</a><a href="#data">数据语义</a><a href="#matching">撮合演示</a><a href="#replay">真实回放</a><a href="#research">研究实验</a><a href="#limits">局限与复现</a></nav>
+
+<section id="start"><div class="tag">01 / 先明确要学什么</div><h2>把一次实践课补成一条完整的学习路径</h2>
+<p class="intro">这份作业回答三个问题：盘口从哪里来？订单按什么规则成交？看到有利的价格信号后，为什么仍然可能亏钱？</p>
+<p>课程 <a href="https://github.com/aslan9/pku_quantllm/issues/6">Issue #6</a> 提供了逐笔成交、逐笔委托和行情快照。公开页面未给出完整评分细则，以下范围由课程讨论和同学公开作业归纳，不代表教师未公开的课堂原话。</p>
+<div class="metrics"><div class="metric"><strong>@@COUNT@@</strong><span>本地三份文件的总记录数</span></div><div class="metric"><strong>@@N@@ 只</strong><span>本次运行的股票数量</span></div><div class="metric"><strong>@@PASSING@@</strong><span>日终十档价量及成交量一致</span></div></div>
+<ol><li><b>约20分钟：</b>读交易基础和数据语义，能解释买一、卖一、限价、成交、撤单。</li><li><b>约20分钟：</b>逐步点击撮合示例，再比较真实回放簿和快照。先猜结果，再看结果。</li><li><b>约30分钟：</b>运行小样本测试和单股票分析；最后阅读研究实验与局限，形成自己的解释。</li></ol>
+<p class="small">本作业参考同学 README 的任务组织和字段提示，未复制其项目源码；本地代码与数值由本次实现和运行产生。使用 Codex 辅助编写、排错和整理，应在理解结果后提交。</p></section>
+
+<section id="basics"><div class="tag">02 / 从零理解交易</div><h2>订单簿是一张持续变化的“买卖排队表”</h2>
+<p>假设有人愿意以10.00元买入，另一些人愿意以10.01元卖出。二者尚未达成一致，所以暂时都留在订单簿里。<b>买一</b>是当前最高买价，<b>卖一</b>是当前最低卖价；同价位所有剩余委托的数量加起来，就是这一档的挂单量。</p>
+<div class="table-wrap"><table><thead><tr><th>术语</th><th>通俗解释</th><th>容易误解的地方</th></tr></thead><tbody>
+<tr><td>限价买单</td><td>愿意按不高于某个价格买入</td><td>不是保证按该价格成交；也可能完全不成交</td></tr>
+<tr><td>主动成交</td><td>新订单的价格能够触及已有对手单</td><td>主动方通常付出买卖价差，较快取得成交</td></tr>
+<tr><td>被动挂单</td><td>暂时留在簿中，等待其他订单来成交</td><td>不保证成交；还要考虑同价前面的队列</td></tr>
+<tr><td>部分成交</td><td>一笔订单只成交了一部分</td><td>剩余数量仍可能继续排队，也可以申请撤销</td></tr>
+<tr><td>成交量</td><td>一笔成交的股数计一次</td><td>买卖双方各扣100股，市场成交量只加100股</td></tr>
+<tr><td>中间价</td><td>（买一价格 + 卖一价格）÷ 2</td><td>衡量价格位置的统计量，不保证能按这个价格交易</td></tr>
+</tbody></table></div>
+<h3>价格优先，再比较时间</h3>
+<p>买方出价越高越优先，卖方要价越低越优先；方向、价格相同时，先到达交易主机的订单优先。连续竞价中，新买单触及已有卖单时，按已有卖价成交。规则依据为<a href="https://www.sse.com.cn/lawandrules/sselawsrules2025/fund/trading/c/c_20260424_10817739.shtml">上交所交易规则第3.5节</a>。</p>
+<p><b>例如：</b>卖一10.00元有700股，卖二10.01元有500股。限价10.01元买入900股，会先成交700股×10.00元，再成交200股×10.01元；成交均价约10.0022元。它不是全部按限价10.01元成交。</p>
+<h3>一分钱为什么可能很贵？</h3>
+<div class="formula">相对价差（bp） = (卖一 − 买一) / 中间价 × 10,000；1 bp = 0.01%</div>
+<p>同样一分钱价差，股价约5元时约20bp，股价约100元时约1bp。买盘挂得厚，只说明显示出来的数量多；它不自动意味着相对交易成本低。</p>
+<details><summary>自测：买一10.00、卖一10.01。如果价格完全不动，立即买入100股再卖出，费用前赚多少？</summary><p>按对手报价成交，买入花1001元、卖出收1000元，亏1元；还没有计入费用。这个算术例子不代表A股可以把刚买的股票当天卖掉。</p></details>
+</section>
+
+<section id="data"><div class="tag">03 / 数据读对，结果才有意义</div><h2>三张表分别记录“变化”“结果”和“照片”</h2>
+<div class="table-wrap"><table><thead><tr><th>文件</th><th>本包行数</th><th>本作业用途</th></tr></thead><tbody>
+<tr><td><code>ord_20260923.parquet</code></td><td>6,276,360</td><td>新增剩余委托、撤单、状态；修改订单簿</td></tr>
+<tr><td><code>exe_20260923.parquet</code></td><td>3,792,934</td><td>已发生的成交；扣减相关订单，累计成交量</td></tr>
+<tr><td><code>snp_20260923.parquet</code></td><td>252,631</td><td>十档盘口等采样快照；独立核对和流动性统计</td></tr>
+</tbody></table></div>
+<p>程序先按股票分组，确认其竞价消息在同一通道，再按 <code>BizIndex</code> 合并排序。不能只按时间排序：同一毫秒可能有多条先后相关的事件。订单号使用 <code>OrderOriNo</code>，对应成交的 <code>BidOrder / AskOrder</code>；<code>OrderNumber</code> 在本包中不用于关联订单。</p>
+<p><code>OrderKind</code> 的65、68、83分别是字符A、D、S的编码；A表示新增，D表示撤单，S表示状态。委托方向66/83对应B/S；成交方向则来自 <code>BSFlag</code>。<code>93000030</code> 要解读为09:30:00.030。价格由float32转成整数分，避免40.830002这样的浮点表示误差影响比较。</p>
+<div class="note"><b>最关键的语义：</b>连续竞价中的新增委托消息通常公布首次撮合后的剩余量；一次全部成交的主动单可以没有新增剩余消息。集合阶段的委托也不能假设在原始委托时刻就已实时披露。依据：<a href="https://bsp.sseinfo.com/admin/static/public/2024-06-07/13f94744fb6244d5a21ee42bddcec9f6/%E4%B8%8A%E6%B5%B7%E8%AF%81%E5%88%B8%E4%BA%A4%E6%98%93%E6%89%80LDDS%E7%B3%BB%E7%BB%9F%E7%AB%9E%E4%BB%B7Level-2%E8%A1%8C%E6%83%85%E6%8E%A5%E5%8F%A3%E8%AF%B4%E6%98%8E%E4%B9%A6.pdf">LDDS接口说明2.0.9，第4.3—4.4节</a>。这份接口说明是语义参考，课程文件的具体映射另由本地记录核实。</div>
+<h3>从你本地文件中找到的一笔真实例子</h3>
+<p>600036的订单299104在09:30:00.030先出现六条主动买入成交，股数为40,834、1,300、100、600、200、300，合计43,334股。随后业务序号347767才发布剩余12,266股的买单。两部分合计55,600股。把12,266股当原始申报量，再减去先前的43,334股，会造成错误。</p>
+<p>历史回放因此采用：新增就加入所披露的剩余量；撤单减少对应订单；连续成交必须扣到被动单；集合成交扣双方。未出现于簿中的主动单不凭空补造。遇到被动单缺失、超量扣减或重复业务序号，程序立即报错。</p>
+<p class="small">相应样本另存于 <code>example_order_299104.csv</code> 和 <code>example_trades_299104.csv</code>。本包只保留部分股票，业务序号的间隔不能直接证明全市场行情丢包。</p>
+</section>
+
+<section id="matching"><div class="tag">04 / 动手观察一次撮合</div><h2>六个步骤，看清排队、部分成交和撤单</h2>
+<p>以下是独立撮合器产生的结果，不使用历史成交来替它决定对手方。价格与数量按整数分、整数股计算。点击“下一步”，观察订单如何变化。</p>
+<div class="controls"><button id="demoPrev">上一步</button><input id="demoRange" type="range" min="0" max="5" value="0" aria-label="撮合示例步骤"><button id="demoNext">下一步</button><span id="demoIndex"></span></div>
+<p id="demoText" aria-live="polite"></p><div class="cols"><div><h3>剩余挂单</h3><div id="demoOrders"></div></div><div><h3>本步骤成交</h3><div id="demoFills"></div></div></div>
+<h3>集合竞价：先集中收单，再确定一个成交价</h3>
+<p>集合竞价需要同时考虑多个订单，先找最大可成交量，再按更优价订单和同价订单的成交约束、未成交量及中间价规则确定价格。本实现采用上交所第3.5.2和3.5.4条；成交配对继续遵循价格与同价顺序。</p>
+<p>本次把每只股票第一笔开盘成交以前的新增和撤单作为输入，由代码自行定价和配对，再与源成交比较。<b>@@OPENING@@只股票的开盘成交顺序、双方订单号、价格和数量完全一致。</b>这一项的算法输入不含真实成交价格；源成交只用于划定开盘核对边界及比较输出。</p>
+<details><summary>自测：撤单能撤掉已经成交的部分吗？</summary><p>不能。本例买单5只撤掉剩余200股，之前成交的300股已经成为成交事实。程序中订单状态和成交记录因此需要分开维护。</p></details>
+</section>
+
+<section id="replay"><div class="tag">05 / 用真实行情检验实现</div><h2>日终一致，仍需诚实面对日内差异</h2>
+<p>本次全量处理 <b>@@EVENTS@@条竞价事件</b>，盘后通道2301的 <b>@@AFTER@@笔成交</b>另行统计，不拿缺少委托流的盘后成交去扣竞价订单簿。每只股票检查订单和价位汇总是否相等，并检查“累计加入 − 累计扣减 = 剩余量”。</p>
+<div class="table-wrap"><table><thead><tr><th>验证项</th><th>本地实测</th><th>结果能够说明什么</th></tr></thead><tbody>
+<tr><td>日终双边十档价量 + 竞价成交股数</td><td>@@PASSING@@ 一致</td><td>日终可观测状态与累计量对得上</td></tr>
+<tr><td>日终竞价金额最大绝对差</td><td>@@AMOUNT_ERROR@@ 元</td><td>程序按整数分×股数汇总；快照金额为整数元</td></tr>
+<tr><td>开盘集合竞价独立配对</td><td>@@OPENING@@ 一致</td><td>仅用开盘委托可以复现这部分撮合</td></tr>
+<tr><td>日内/收盘可比快照</td><td>@@CHECKS@@ 个</td><td>限连续竞价时段及15:00以后；不核对集合虚拟盘口</td></tr>
+<tr><td>按标注时刻直接核对最优买卖价</td><td>@@BEST@@</td><td>快照时刻以前的事件前缀，与采样盘口并非总一致</td></tr>
+<tr><td>同口径十档价量全部一致</td><td>@@FULL@@</td><td>比只核对买一卖一价格更严格</td></tr>
+</tbody></table></div>
+<div class="note warning"><b>对齐口径：</b>消费按业务序号排列、累计最大事件时间不晚于快照标签的前缀。不向后搜索匹配状态，不用快照覆盖或修复订单簿。快照没有BizIndex，因此不称为交易所内部的精确瞬时对齐；不一致也不能单独证明数据丢失。</div>
+@@CHECK_FIG@@
+<h3>互动：同一标签时刻的两份盘口</h3>
+<p class="small">为控制文件大小，页面仅内嵌600036、601688、688981每个有核对点的分钟的第一帧。全部股票、全部核对点都在CSV中。左边由逐笔重建，右边直接来自快照。该浏览视图用于事后学习，不是实时交易界面。</p>
+<div class="controls"><label for="stock">股票</label><select id="stock"></select><button id="framePrev">上一帧</button><button id="play">播放</button><button id="frameNext">下一帧</button><input id="frameRange" type="range" min="0" value="0" aria-label="历史分钟进度"></div>
+<div id="frameStatus" class="status" aria-live="polite"></div>
+<div class="book-grid"><div><h3>逐笔重建</h3><div id="rebuilt" class="depth"></div></div><div><h3>源行情快照</h3><div id="snapshot" class="depth"></div></div></div>
+<details><summary>展开查看全部股票的核对摘要</summary><div class="table-wrap"><table><thead><tr><th>代码</th><th>事件数</th><th>日内十档价量</th><th>日终</th><th>开盘集合</th></tr></thead><tbody>@@STOCK_ROWS@@</tbody></table></div></details>
+</section>
+
+<section id="research"><div class="tag">06 / 一个可以解释清楚的研究问题</div><h2>买盘更厚，能否抵消主动交易的成本？</h2>
+<p>先统计正常双边报价：本次连续竞价样本的相对价差中位数为 <b>@@SPREAD@@ bp</b>，一分钱价差占 <b>@@TICK@@</b>。下图同时展示逐股价格与价差的关系，以及全部样本逐分钟的成交量。成交量图按股票数直接加总，不能解读为资金流入流出。</p>
+@@LIQUIDITY_FIG@@
+<h3>研究设计：先定规则，再看早/下午结果</h3>
+<div class="formula">盘口不平衡 I = (买一数量 − 卖一数量) / (买一数量 + 卖一数量)</div>
+<p>固定把I≥0.5称为买盘较厚，I≤−0.5称为卖盘较厚，其余为中性。每60秒设置一个决策点，只用决策时刻减3秒以前的最新快照计算信号。入场基准取决策时刻以前的最新报价；未来标签取30秒以后第一份快照。相关报价超过6秒容差就丢弃，且不跨午休或收盘集合阶段。</p>
+<p>这里没有拟合模型或按下午结果调参。上午作为探索段，下午作同日时间留出；因股票和交易日相同，下午不等于独立跨日样本外。阈值不是上午训练选出来的“最优参数”。</p>
+<p class="small">30秒是目标跨度，实际入口与未来报价取相邻快照，时间间隔会略有差异。下表把不同股票的观测合并后等权平均，可能混入股票价位、流动性和样本构成差异；不能直接解释为控制了股票差异后的预测能力或因果关系。</p>
+<div class="table-wrap"><table><thead><tr><th>时间段</th><th>信号组</th><th>样本数</th><th>未来中间价变化（bp）</th><th>纸面买入再卖出（bp）</th></tr></thead><tbody>@@GROUP_ROWS@@</tbody></table></div>
+@@SIGNAL_FIG@@
+<p>在本次运行的下午样本中，买盘较厚组未来中间价变化约为<b>@@PM_BUY@@ bp</b>，卖盘较厚组约为<b>@@PM_SELL@@ bp</b>；但买盘较厚组按对手报价计算的纸面买卖结果约为<b>@@PM_PAPER@@ bp</b>。这些是描述性统计，条件价格变化与纸面交易结果应分别理解；不能据此提出已验证的盈利策略。</p>
+<p><b>两种数值要分清：</b>中间价变化 = 未来中间价/当前中间价−1；纸面买入再卖出 = 未来买一/当前卖一−1。后者已经跨了买卖价差，但仍没有费用、成交延迟、排队、数量容量和市场冲击。它不是可直接执行的A股回测。</p>
+<h3>互动：给“买盘较厚”组加上一个假设费用</h3>
+<div class="controls"><label for="costSession">时段</label><select id="costSession"><option>上午</option><option selected>下午</option></select><label for="fee">往返费用</label><input id="fee" type="range" min="0" max="20" step="0.5" value="6"><output id="feeValue"></output></div>
+<p id="costValue" class="cost-value" aria-live="polite"></p><p class="small">6bp只是可调的教学假设，并非核实后的券商费率；这里按收益率直接减费用。未纳入按笔最低收费，不能用此数值替代具体账户的成本计算。</p>
+<details><summary>自测：信号能预测未来中间价，为何还不能宣称策略盈利？</summary><p>你未必能以中间价成交。主动成交需要跨价差，被动成交可能排不到、或恰好在价格转差时成交。还有费用、延迟、库存约束及风险。单日多股票观测也会相互相关；本报告不把大量观测当成大量独立交易日，不报告未经正确处理的显著性结论。</p></details>
+</section>
+
+<section id="limits"><div class="tag">07 / 写进作业的结论与边界</div><h2>本次实践能够支持的结论</h2>
+<ol><li><b>订单簿可以用增量事件维护。</b>使用正确的关联键和剩余量语义，本次日终核对与订单量守恒均通过。</li><li><b>有独立输入的撮合实验才适合验证撮合规则。</b>开盘集合委托可以用于这一验证；连续历史回放本身消费了真实成交，不是预测出了这些成交。</li><li><b>时间标签不是共同的业务水位。</b>日内差异如实保留，任何增加时间窗口的后续研究都应单独报告核对口径。</li><li><b>方向信息与可交易收益之间有执行成本。</b>固定信号实验只是单日条件统计，没有证实稳定盈利。</li></ol>
+<h3>若改成真实交易，最可能在哪里出问题？</h3>
+<p>实际报单到达时，看到的盘口可能已经变化；同价挂单前面还有其他订单；一次性吃掉多档会改变后续市场路径；部分成交和撤单回报之间存在时间差；错误地把当日买入数量当成可卖数量会违反持仓约束。交易规则中的资金、持仓、申报数量、价格有效范围、停复牌等也需要单独实现。</p>
+<p>本项目的独立撮合器处理已经通过申报校验的限价单，未实现账户、T+1可卖余额、资金冻结、各种市价单和完整风控。它适合课程理解撮合内核，不能称作完整券商交易系统。纸面买卖实验不产生账户订单或真实交易。</p>
+<h3>复现与文件入口</h3>
+<p>完整源码位于本作业目录；三份原始Parquet只读，未复制进提交包。其他机器安装依赖后，将 <code>--data-dir</code> 指向数据目录即可。在本仓库根目录安装依赖后运行：</p>
+<pre>python -m unittest discover -s . -p "test_*.py" -v
+python analyze.py --data-dir sse50_20260923</pre>
+<p>结果：<code>summary.json</code>为全量摘要；<code>checks_代码.csv</code>为逐快照核对；<code>signal_observations.csv</code>保留每个信号和收益标签的时间；<code>data_profile.json</code>记录文件哈希与schema。全量分析耗时约@@SECONDS@@秒（不含图表生成）。运行版本：<code>@@ENV@@</code>。</p>
+<p>运行命令生成的“提交说明.txt”可在核实理解后改写，并填入自己的仓库地址。课程仓库要求在对应主Issue下评论提交仓库链接，见<a href="https://github.com/aslan9/pku_quantllm">课程README</a>。</p>
+<h3>参考资料与借鉴说明</h3>
+<ul><li><a href="https://github.com/aslan9/pku_quantllm/issues/6">课程实践课Issue与讨论</a>：确定数据来源和任务背景。</li><li><a href="https://github.com/gry1024/sse50-market-lab">gry1024 / sse50-market-lab</a>：参考回放、独立模拟、对账三个模块的划分。</li><li><a href="https://github.com/Chuboxiao/quantllm-lecture3homework">Chuboxiao / quantllm-lecture3homework</a>：参考字段语义和将回放与撮合区分的说明；结果均重新计算。</li><li><a href="https://www.sse.com.cn/lawandrules/sselawsrules2025/fund/trading/c/c_20260424_10817739.shtml">上交所交易规则（2026年修订）</a>：撮合规则依据。</li><li>上文链接的LDDS接口说明：解释行情发布语义；不把公开接口文档等同于课程供应商的正式字段字典。</li></ul>
+</section><footer>本报告由本地数据生成，可离线阅读。请结合源代码、CSV及自己的理解使用，不将教学模拟解释为实盘收益。</footer>
+</main>
+<script id="payload" type="application/json">@@DATA@@</script>
+<script>
+"use strict";
+const DATA=JSON.parse(document.getElementById('payload').textContent);
+const el=id=>document.getElementById(id);
+const fmt=n=>Number(n).toLocaleString('zh-CN');
+const money=p=>(p/100).toFixed(2);
+const table=(heads,rows)=>'<div class="table-wrap"><table><thead><tr>'+heads.map(x=>'<th>'+x+'</th>').join('')+'</tr></thead><tbody>'+rows.map(row=>'<tr>'+row.map(x=>'<td>'+x+'</td>').join('')+'</tr>').join('')+'</tbody></table></div>';
+function showDemo(){let i=Number(el('demoRange').value),d=DATA.demo[i];el('demoIndex').textContent=(i+1)+' / '+DATA.demo.length;el('demoText').textContent=d.text;el('demoOrders').innerHTML=d.orders.length?table(['订单','方向','价格','余量'],d.orders.map(o=>[o.oid,o.side==='B'?'买':'卖',money(o.price),fmt(o.qty)])):'当前无剩余委托';el('demoFills').innerHTML=d.fills.length?table(['买单/卖单','成交价','股数'],d.fills.map(t=>[t.buy+' / '+t.sell,money(t.price),fmt(t.qty)])):'本步骤无成交';}
+el('demoRange').addEventListener('input',showDemo);
+el('demoPrev').onclick=()=>{el('demoRange').value=Math.max(0,Number(el('demoRange').value)-1);showDemo();};
+el('demoNext').onclick=()=>{el('demoRange').value=Math.min(DATA.demo.length-1,Number(el('demoRange').value)+1);showDemo();};showDemo();
+function depth(bids,asks){let m=Math.max(1,...bids.map(x=>x[1]),...asks.map(x=>x[1]));let rows=[];for(let i=asks.length-1;i>=0;i--)rows.push(['卖'+(i+1),asks[i],true]);for(let i=0;i<bids.length;i++)rows.push(['买'+(i+1),bids[i],false]);return '<table><thead><tr><th>档位</th><th>价格（元）</th><th>数量（股）</th></tr></thead><tbody>'+rows.map(([name,[p,q],sell])=>'<tr class="'+(sell?'sell':'buy')+'"><td>'+name+'</td><td>'+money(p)+'</td><td class="qty"><div class="bar" style="width:'+(100*q/m).toFixed(2)+'%"></div><span>'+fmt(q)+'</span></td></tr>').join('')+'</tbody></table>';}
+let timer=null;
+function stop(){if(timer!==null)clearInterval(timer);timer=null;el('play').textContent='播放';}
+function showFrame(){let frames=DATA.frames[el('stock').value]||[];if(!frames.length){el('frameStatus').textContent='本次运行未包含演示股票。';return;}el('frameRange').max=frames.length-1;let i=Math.min(Number(el('frameRange').value),frames.length-1);el('frameRange').value=i;let f=frames[i];el('frameStatus').textContent=f.time+' · BizIndex '+f.seq+' · '+(f.equal?'十档价量一致':'存在差异')+' · 累计成交量：重建 '+fmt(f.volume)+' / 快照 '+fmt(f.snapshot_volume)+' · '+(i+1)+'/'+frames.length;el('frameStatus').className='status '+(f.equal?'ok':'diff');el('rebuilt').innerHTML=depth(f.bids,f.asks);el('snapshot').innerHTML=depth(f.snapshot_bids,f.snapshot_asks);}
+Object.keys(DATA.frames).forEach(k=>{let o=document.createElement('option');o.value=k;o.textContent=k;el('stock').append(o);});
+el('stock').onchange=()=>{stop();el('frameRange').value=0;showFrame();};el('frameRange').oninput=()=>{stop();showFrame();};
+el('framePrev').onclick=()=>{stop();el('frameRange').value=Math.max(0,Number(el('frameRange').value)-1);showFrame();};
+el('frameNext').onclick=()=>{stop();el('frameRange').value=Math.min(Number(el('frameRange').max),Number(el('frameRange').value)+1);showFrame();};
+el('play').onclick=()=>{if(timer!==null){stop();return;}if(!el('stock').value)return;el('play').textContent='暂停';timer=setInterval(()=>{let next=Number(el('frameRange').value)+1;if(next>Number(el('frameRange').max)){stop();return;}el('frameRange').value=next;showFrame();},700);};showFrame();
+function cost(){let f=Number(el('fee').value),g=DATA.groups.find(x=>x.session===el('costSession').value&&x.group==='买盘较厚');el('feeValue').textContent=f.toFixed(1)+' bp';el('costValue').textContent=g?'纸面均值 '+g.paper_bps.toFixed(3)+' − 费用 '+f.toFixed(1)+' = '+(g.paper_bps-f).toFixed(3)+' bp':'此组没有样本';}
+el('fee').oninput=cost;el('costSession').onchange=cost;cost();
+</script></body></html>

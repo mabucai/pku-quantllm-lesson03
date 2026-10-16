@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第三节学习讲义｜一笔股票买卖是怎么发生的？</title>
+<style>
+:root{color-scheme:light;--ink:#203d4b;--muted:#586e78;--blue:#316b83;--paper:#f6f8f8;--line:#d8e2e7;--warm:#966239}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.9 system-ui,"Microsoft YaHei",sans-serif}a{color:var(--blue);text-underline-offset:4px}header,main,footer{max-width:920px;margin:auto;padding-left:32px;padding-right:32px}header{padding-top:48px;padding-bottom:28px}.eyebrow{font-size:14px;color:var(--muted)}h1{font-size:38px;line-height:1.4;margin:12px 0 18px;letter-spacing:-.7px}header p{margin:6px 0}h2{font-size:27px;line-height:1.5;margin:0 0 20px}h3{font-size:20px;line-height:1.6;margin:26px 0 12px}p{margin:12px 0}.lead{font-size:19px}.muted,.small{color:var(--muted);font-size:14px}.reading-path{margin:24px 0 0;padding:14px 18px;background:#eaf1f4;border-radius:7px;font-size:15px}nav{display:flex;gap:8px 20px;flex-wrap:wrap;padding:10px 0 26px;font-size:15px}nav a{text-decoration:none}section{padding:30px 34px;margin:0 0 24px;background:#fff;border:1px solid var(--line);border-radius:10px;scroll-margin-top:20px}.chapter{font-size:14px;color:var(--blue);margin-bottom:8px}.remember{padding:12px 16px;border-left:3px solid var(--blue);background:#f0f6f8;margin:22px 0 0}.example-label{font-size:14px;color:var(--warm);margin-bottom:8px}.two-cols{display:grid;grid-template-columns:1fr 1fr;gap:22px}.market-side{background:#f5f8fa;padding:16px;border-radius:7px}.market-side h3{font-size:18px;margin:0 0 12px}.ask{background:#fcf7f1}.quote{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}.quote:last-child{border:0}.quote span{font-size:15px}.quote strong{font-size:19px}.bubble{font-size:21px;line-height:1.7;padding:20px;background:#f0f6f8;border-radius:7px;text-align:center}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0}.step{padding:14px 16px;background:#f5f8fa;border-radius:6px}.step b,.step span{display:block}.step span{font-size:15px;color:var(--muted)}.table-wrap{overflow-x:auto}table{border-collapse:collapse;width:100%;margin:15px 0;font-size:15px;font-variant-numeric:tabular-nums}th,td{text-align:left;border-bottom:1px solid var(--line);padding:10px 12px;vertical-align:top}th{background:#f1f5f7;font-weight:600}.controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:16px 0}button,select,input{font:inherit;color:var(--ink)}button,select,input[type=number]{background:#fff;border:1px solid #a6bac3;border-radius:5px;padding:8px 12px}button{cursor:pointer}button:hover{background:#edf4f7}button:disabled{color:#77858c;cursor:default;background:#f5f6f6}button.primary{background:var(--blue);color:#fff;border-color:var(--blue)}button:focus-visible,select:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid #72a9bd;outline-offset:3px}input[type=range]{min-width:100px;flex:1;accent-color:var(--blue)}input[type=number]{width:150px;max-width:100%}.demo-title{font-size:18px;font-weight:600;margin:16px 0 8px}.demo-explain{margin:0}.demo-result{padding:12px 15px;background:#f2f7f5;margin-top:12px;border-radius:5px}.calculator{padding:18px;background:#f2f6f8;border-radius:7px}.calculator label{display:block;font-size:15px}.calculator .two-cols{gap:14px}.calc-result{font-size:23px;line-height:1.5;margin-top:14px}.formula{padding:12px 16px;background:#f4f7f8;overflow-wrap:anywhere;font-size:16px}.balance{font-size:23px;text-align:center;padding:16px;background:#f4f8fa;line-height:1.6}details{border-top:1px solid var(--line);padding:14px 0;margin-top:12px}details:last-child{padding-bottom:0}summary{cursor:pointer;font-weight:600;line-height:1.7}details p{margin:12px 0}.optional{font-size:14px;font-weight:400;color:var(--muted);display:block}.quiz details{margin:0}.quiz summary{font-weight:500}code{font:14px Consolas,monospace;background:#edf3f5;padding:2px 5px;border-radius:3px}pre{font:14px/1.8 Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere;padding:16px;background:#f0f5f7}.flow{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;font-size:15px;padding:16px 0}.flow b{padding:9px 13px;background:#edf4f6;border-radius:5px}.flow span{color:var(--muted)}ol,ul{padding-left:24px}li{margin:10px 0}footer{padding-top:10px;padding-bottom:50px;color:var(--muted);font-size:14px}.source-list{font-size:14px;line-height:1.8}.end-note{margin-top:22px;font-size:18px}.result-number{font-size:22px;white-space:nowrap}.summary-points p{padding-bottom:12px;border-bottom:1px solid var(--line)}
+@media(max-width:650px){header,main,footer{padding-left:16px;padding-right:16px}header{padding-top:28px}h1{font-size:29px}h2{font-size:23px}section{padding:23px 19px}body{font-size:16px}.two-cols,.steps{grid-template-columns:1fr}.bubble{font-size:19px}.quote strong{font-size:18px}.calc-result{font-size:21px}table{font-size:14px}th,td{padding:9px 7px}nav{gap:7px 16px}.result-number{font-size:18px}}
+@media print{body{background:#fff;font-size:11pt}header,main,footer{max-width:none;padding-left:0;padding-right:0}h1{font-size:25pt}h2{font-size:18pt}section{border:0;border-top:1px solid #ddd;border-radius:0;padding:20px 0}nav,.controls,.calculator{display:none}h2,h3{break-after:avoid}.table-wrap{overflow:visible}a{color:inherit}.market-side,.steps{break-inside:avoid}}
+</style></head>
+<body>
+<header>
+<div class="eyebrow">第三节实践课 · 从零开始的学习讲义 · 2026-10-16 修订</div>
+<h1>一笔股票买卖<br>是怎么发生的？</h1>
+<p class="lead">从“我想买900股”开始，看懂盘口、成交和交易成本。</p>
+<p class="small">先读正文，再点开练习答案。第一次学习可以跳过文末的代码和实验明细。</p>
+<div class="reading-path"><b>这章的顺序：</b>看报价 → 发订单 → 发生交易 → 算成本 → 用数据还原过程</div>
+</header>
+<main>
+<nav aria-label="学习目录"><a href="#book">1. 看懂盘口</a><a href="#matching">2. 怎么成交</a><a href="#cost">3. 算清成本</a><a href="#data">4. 读懂数据</a><a href="#homework">5. 理解作业</a><a href="#quiz">自测</a></nav>
+
+<section id="book">
+<div class="chapter">第1步 · 先看别人愿意出什么价</div>
+<h2>盘口：当前还在等待的买卖报价</h2>
+<p>假设你打开一只股票，看到下面的报价。这些人都提交了买卖请求，但下面显示的数量还没成交。这样的请求叫<b>订单</b>，也叫<b>委托</b>。</p>
+<div class="example-label">下面是一组虚构报价，用来讲清交易过程。</div>
+<div class="two-cols">
+<div class="market-side"><h3>想买的人</h3><div class="quote"><span>买一 · 最高买价</span><strong>9.99元 × 500股</strong></div><div class="quote"><span>买二 · 次高买价</span><strong>9.98元 × 800股</strong></div></div>
+<div class="market-side ask"><h3>想卖的人</h3><div class="quote"><span>卖一 · 最低卖价</span><strong>10.00元 × 700股</strong></div><div class="quote"><span>卖二 · 次低卖价</span><strong>10.01元 × 500股</strong></div></div>
+</div>
+<p><b>买一</b>是当前最高的买入报价；<b>卖一</b>是当前最低的卖出报价。卖一的700股，表示有人愿意按10元卖出共700股，可能来自好几个人。</p>
+<p>目前双方还没有成交：买的人最多出9.99元，卖的人最低要10元。</p>
+<p>保存这些未成交订单的完整记录叫<b>订单簿</b>。把同一个价格的数量加起来，就得到盘口上的“一档”；“十档盘口”就是展示买方和卖方各十个价位。</p>
+<div class="remember"><b>先记住：</b>你想尽快买到，先看卖一；你想尽快卖出，先看买一。</div>
+<details><summary>想一想：你按9.99元挂买单，会立刻成交吗？</summary><p>在这组报价下不会。卖方最低要10元，你只出9.99元，只能先等待。你新挂的订单还要排在原来同价的买单后面。</p></details>
+</section>
+
+<section id="matching">
+<div class="chapter">第2步 · 跟着一笔订单往下看</div>
+<h2>你要买900股，会先买到谁的？</h2>
+<div class="bubble">“我想买900股，每股最多付10.01元。”</div>
+<p>这叫<b>限价买单</b>。“限价”规定你愿意支付的最高价格；实际成交可以更便宜。</p>
+<p>交易所把能够成交的买单和卖单配对，这个过程叫<b>撮合</b>。先买价格便宜的；如果价格相同，先买先到达交易所的那张订单。这就是<b>价格优先、时间优先</b>。</p>
+<p>假设刚才卖一的700股由甲、乙两人挂出，甲比乙先到；卖二由丙挂出：</p>
+<div class="steps"><div class="step"><b>① 先买甲的300股</b><span>每股10.00元</span></div><div class="step"><b>② 再买乙的400股</b><span>同价，排在甲后面</span></div><div class="step"><b>③ 最后买丙的200股</b><span>每股10.01元</span></div></div>
+<p>你一共买到900股，花了 <b>300×10 + 400×10 + 200×10.01 = 9,002元</b>。丙原来有500股，现在还剩300股等待成交。这里暂时不算手续费。</p>
+<h3>点一下，亲眼看订单怎么变化</h3>
+<p class="small">起点是甲、乙、丙已经挂好卖单。先猜一下，再点击“下一步”。这组示例由作业中的撮合代码计算。</p>
+<div class="controls"><button id="demoPrev" type="button">上一步</button><input id="demoRange" type="range" min="0" max="5" value="2" aria-label="买卖过程步骤"><button id="demoNext" class="primary" type="button">下一步</button><span id="demoIndex" class="small"></span></div>
+<div id="demoTitle" class="demo-title"></div><p id="demoText" class="demo-explain" aria-live="polite"></p>
+<div class="two-cols"><div><h3>还在等待的订单</h3><div id="demoOrders"></div></div><div><h3>这一步刚成交的交易</h3><div id="demoFills"></div></div></div>
+<p id="demoTakeaway" class="demo-result"></p>
+<p>后两步会遇到两个新词：<b>部分成交</b>，表示只买到了一部分；<b>撤单</b>，表示取消仍未成交的部分。已经成交的部分不能通过撤单收回。</p>
+<div class="remember"><b>先记住：</b>限价合适才可能成交；同价时要排队；买不完的余量可以继续等待。</div>
+<details><summary>“连续竞价”和“集合竞价”又是什么？</summary><p><b>连续竞价：</b>订单一张张到达，能配对就成交。刚才的例子就是这种方式。</p><p><b>集合竞价：</b>先把一段时间内的订单收集起来，再按统一规则算出一个成交价，集中成交。例如，开盘集合竞价会形成开盘价。</p><p>这份作业两种撮合都实现了。第一次学习先分清“边收单边成交”和“收集后一起成交”，具体定价规则可以到实验明细中再看。</p></details>
+</section>
+
+<section id="cost">
+<div class="chapter">第3步 · 从“买得到”走到“赚不赚钱”</div>
+<h2>股票价格没变，也可能亏钱</h2>
+<p>回到最初的报价：买一9.99元，卖一10.00元。二者之间的一分钱叫<b>买卖价差</b>。</p>
+<p>下面借用这两个价格，另假设买卖两边都有足够的数量。报价一直不变，你按卖一买1000股，再按买一卖1000股：</p>
+<div class="table-wrap"><table><thead><tr><th>动作</th><th>使用的价格</th><th>金额</th></tr></thead><tbody><tr><td>买入1000股</td><td>卖一10.00元</td><td>付出10,000元</td></tr><tr><td>卖出1000股</td><td>买一9.99元</td><td>收回9,990元</td></tr></tbody></table></div>
+<p><b>还没算手续费，就亏了10元。</b>买和卖使用不同的对手报价，这会产生交易成本。</p>
+<p class="small">这里先做成本算术。A股普通股票当天买入的部分通常不能当天卖出；若做当天的一买一卖，卖出需要有原先可卖的持仓。</p>
+<h3>bp：把很小的比例说清楚</h3>
+<p><b>1 bp = 0.01% = 万分之一。</b>中文叫“基点”。它是比例单位，不是人民币的一分钱。</p>
+<div class="balance">对1万元而言：<b>1 bp = 1元</b><br><span class="small">刚才亏10元 ÷ 买入金额1万元 = 亏10 bp</span></div>
+<div class="table-wrap"><table><thead><tr><th>比例</th><th>百分比</th><th>对应1万元的金额</th></tr></thead><tbody><tr><td>1 bp</td><td>0.01%</td><td>1元</td></tr><tr><td>10 bp</td><td>0.1%</td><td>10元</td></tr><tr><td>100 bp</td><td>1%</td><td>100元</td></tr></tbody></table></div>
+<div class="calculator"><div class="two-cols"><label for="principal">换个金额试试（元）<br><input id="principal" type="number" min="0" step="1000" value="10000" inputmode="decimal"></label><label for="basisPoints">收益或成本（bp）<br><input id="basisPoints" type="number" step="0.1" value="10" inputmode="decimal"></label></div><p id="bpResult" class="calc-result" aria-live="polite"></p><p class="small">金额 × bp ÷ 10,000。填负数表示损失；填正数表示对应的收益或成本大小。</p></div>
+<details><summary>为什么看涨，也不一定能赚钱？</summary><p>假设一次价格上涨给你带来5bp的有利变化，但完成买卖要损耗7bp的价差和费用，最后仍然可能亏损。<b>价格优势必须大到足以覆盖交易成本。</b></p><p>还有一个常见指标叫<b>中间价</b>，就是买一与卖一的平均数。在9.99元和10.00元之间，中间价是9.995元。它可以用来观察价格变化，但你不一定能按它成交。</p></details>
+<div class="remember"><b>先记住：</b>“价格上涨”与“我能赚到钱”之间，还隔着买卖价差、手续费和能否真正成交。</div>
+</section>
+
+<section id="data">
+<div class="chapter">第4步 · 现在再打开老师给的数据</div>
+<h2>三份文件，记录同一市场的不同侧面</h2>
+<p>老师给的数据经常称为<b>Level-2行情</b>：比只看最新股价更细，还能看到委托变化、每笔成交和多档报价。<b>逐笔</b>就是一条一条记录。</p>
+<div class="table-wrap"><table><thead><tr><th>文件开头</th><th>你可以把它看成</th><th>它回答什么问题？</th></tr></thead><tbody><tr><td><code>ord</code> · 委托</td><td>等待队列的变化记录</td><td>增加了什么挂单？撤掉了多少？</td></tr><tr><td><code>exe</code> · 成交</td><td>已经做成的生意</td><td>谁和谁成交？什么价？多少股？</td></tr><tr><td><code>snp</code> · 快照</td><td>给盘口拍的一张照片</td><td>采样时，买卖各档还有多少？</td></tr></tbody></table></div>
+<h3>“重建订单簿”就是按记录把过程重放一遍</h3>
+<p>例如，某张卖单的变化是这样：</p>
+<div class="table-wrap"><table><thead><tr><th>发生了什么</th><th>程序怎么更新</th><th>还剩多少</th></tr></thead><tbody><tr><td>新增卖单300股</td><td>加上300股</td><td>300股</td></tr><tr><td>其中100股成交</td><td>减去100股</td><td>200股</td></tr><tr><td>再撤掉50股</td><td>减去50股</td><td>150股</td></tr></tbody></table></div>
+<p>处理完这些记录，程序算出剩余150股，再找合适时点的快照核对。这就是本次实践最核心的工作。</p>
+<div class="flow" aria-label="数据处理流程"><b>读取变化记录</b><span>→</span><b>更新未成交订单</b><span>→</span><b>和盘口快照比较</b></div>
+<details><summary>一个必须知道的细节：文件里的“新增量”可能是剩余量</summary><p>举个简化例子：一笔新买单原本有1000股，刚到就成交600股，随后行情才发布剩余400股的新增挂单。</p><p>此时加入等待队列的是<b>400股</b>。不能再从这400股里扣掉之前成交的600股，否则会算成负数。</p><p>你下载的这份数据就有这种发布顺序。作业代码已按这一规则处理。更具体的真实订单例子放在实验明细中。</p></details>
+<div class="remember"><b>先记住：</b>委托和成交告诉你过程，快照帮助你核对结果。快照本身不能告诉你每张订单的完整排队过程。</div>
+</section>
+
+<section id="homework">
+<div class="chapter">第5步 · 把概念连到你的作业</div>
+<h2>我们做了什么，学到了什么？</h2>
+<p>这份作业完成了三件事：写一个能配对订单的撮合器；用真实数据重放一天的订单变化；做一个简单实验，比较价格变化与交易成本。</p>
+<div class="summary-points">
+<p><b>① 撮合规则能用代码验证。</b><br>只给程序开盘前的委托，让它自己算成交。核对@@N@@只股票，其中@@OPENING_COUNT@@只的开盘成交与真实记录一致。</p>
+<p><b>② 重放后，收盘结果对得上。</b><br>核对@@N@@只股票，其中@@PASSING_COUNT@@只的日终十档价格、数量和累计成交量都与快照一致。</p>
+<p><b>③ 中途拍下的“照片”还存在差异。</b><br>直接按快照标注的时刻核对，所有十档价格和数量全部相同的快照占@@FULL@@。这个比例衡量的是所选时刻下两份盘口是否完全相同；不能直接用它判断整个程序的正确率或数据是否丢失。</p>
+</div>
+<details><summary>为什么收盘能对上，中途却不一定对得上？</summary><p>想象记录单上的时间是10:00:00.200，而照片只标10:00:00。你按标签选出的订单状态，可能与拍照的实际瞬间不同。</p><p>这是说明时间对齐困难的假设例子，并非对本包所有差异的定论。快照和逐笔没有共同的业务序号，具体差异还需要进一步核查。所以，作业保留不一致的结果，没有用快照去改写订单簿。</p></details>
+<h3>一个小实验：买方排得更多，够不够赚钱？</h3>
+<p>我们把买一挂单量明显大于卖一的情况放在一组，观察随后约30秒的变化。这叫研究一个<b>信号</b>：看看某种现象能否提示后续价格。</p>
+<p>下面是下午这一组的平均结果。为方便理解，同时换算成“假如一笔1万元交易恰好取得该比例”，相当于多少元：</p>
+<div class="table-wrap"><table><thead><tr><th>看的是什么</th><th>平均结果</th><th>每1万元的比例换算</th></tr></thead><tbody><tr><td>只观察中间价变化<br><span class="small">买一和卖一的平均价如何移动</span></td><td class="result-number">@@PM_BUY@@ bp</td><td>@@PM_BUY@@ 元</td></tr><tr><td>按当前卖一买、未来买一卖<br><span class="small">用买卖双方报价做纸面计算</span></td><td class="result-number">@@PM_PAPER@@ bp</td><td>@@PM_PAPER@@ 元</td></tr></tbody></table></div>
+<p><b>@@PM_EXPLAIN@@</b>学习时要分清：观察价格变化，与按买卖双方报价计算收益，回答的是不同问题。</p>
+<p class="small">这里只是单日数据的条件平均，金额列是比例换算，不是实际交易盈亏。纸面计算尚未扣手续费，也没有保证能成交；不能据此认定策略能稳定赚钱。完整取样方法见实验明细。</p>
+<div class="remember"><b>这章最重要的三句话：</b><br>订单按规则排队和成交。<br>逐笔记录可以还原订单簿的变化。<br>判断涨跌之后，还要考虑成交与成本。</div>
+</section>
+
+<section id="quiz" class="quiz">
+<div class="chapter">学完之后 · 先自己回答，再点开答案</div>
+<h2>五个问题，检查是否真正看懂</h2>
+<details><summary>1. 买一9.99元、卖一10元，你急着买，应该先看哪边？</summary><p>看卖一。卖一表示当前卖家愿意接受的最低价格；想立即买到，需要与卖家的报价配对。实际能买多少，还受挂单数量限制。</p></details>
+<details><summary>2. 限价10.01元买900股，会全部按10.01元成交吗？</summary><p>不一定。在本讲义的例子中，先按10元买700股，再按10.01元买200股。限价是愿意付出的上限，不是指定所有成交都必须用这个价格。</p></details>
+<details><summary>3. 一张500股的订单已成交300股，撤单能撤多少？</summary><p>只能申请撤销尚未成交的200股。实盘中撤单还需要交易所确认；本章示例假设撤单成功到达，期间没有新增成交。</p></details>
+<details><summary>4. 1万元交易赚5bp，相当于多少元？</summary><p>5元。10,000 × 5 ÷ 10,000 = 5。5bp也等于0.05%。</p></details>
+<details><summary>5. 一个信号能提示价格上涨，为什么还不能直接拿来交易？</summary><p>有利的价格变化可能小于价差和费用；挂单可能排不到；订单到达时价格可能已经变了。需要把“看对方向”和“实际成交后的收益”分别检验。</p></details>
+<p class="end-note">能用自己的话回答这五个问题，就已经抓住了这章的主线。</p>
+</section>
+
+<section id="next">
+<div class="chapter">选读 · 理解概念后再看</div>
+<h2>下一步，可以怎样动手？</h2>
+<p>试着把买入900股改成600股。你应该只买到甲的300股和乙的300股，丙还不用参与。我们附了一个只包含这笔买入的小练习，可以直接运行核对。</p>
+<details><summary>查看最短运行步骤<span class="optional">第一次读讲义可以先跳过。</span></summary><p>安装依赖后，在本仓库根目录打开终端，运行：</p><pre>python run_demo.py --orders examples/buy_600.json</pre><p>文件中已经把订单4的 <code>qty</code> 改成600，它表示买入股数。你还可以改成800再试一次。<code>price_cents</code> 的单位是“分”，1001表示10.01元。</p><p><a href="../README.md">完整运行说明</a>还包括测试和全量分析命令。</p></details>
+<p><a href="technical_report.html">打开实验明细：数据字段、全部结果、真实盘口回放和代码说明 →</a></p>
+<details><summary>资料来源与作业范围</summary><div class="source-list"><p>本讲义基于<a href="https://github.com/aslan9/pku_quantllm/issues/6">第三节实践课公开讨论</a>与已下载数据整理。公开页面没有完整课堂讲义和评分细则，这是一份帮助补学的材料。</p><p>撮合与交易制度参考<a href="https://www.sse.com.cn/lawandrules/sselawsrules2025/fund/trading/c/c_20260424_10817739.shtml">上交所交易规则（2026年修订）</a>。字段与发布顺序的接口来源，以及参考的同学项目，均保留在实验明细末尾。</p><p>代码实现、分析结果与验证记录保存在作业目录。使用Codex辅助整理。本项目用于学习撮合和行情回放，尚未实现完整账户、持仓交收与实盘风控。</p></div></details>
+</section>
+</main>
+<footer>学习版正文到这里结束。需要复现数值时，再查看实验明细与源代码。原始数据日期：2026-09-23。</footer>
+<script id="payload" type="application/json">@@DATA@@</script>
+<script>
+"use strict";
+const DATA=JSON.parse(document.getElementById('payload').textContent);
+const el=id=>document.getElementById(id);
+const fmt=n=>Number(n).toLocaleString('zh-CN');
+const money=p=>(p/100).toFixed(2);
+const names={1:'甲',2:'乙',3:'丙',4:'你',5:'另一位买家'};
+const explanations=[
+  ['甲先挂单','甲想按10元卖300股，暂时还没有买家来成交。','挂单只是表达意愿，仍要等待交易。'],
+  ['乙也挂单','乙也按10元卖400股。价格一样，但乙比甲晚到，要排在甲后面。','同一个价位，先到的人优先。'],
+  ['三位卖家已经准备好','甲和乙都要10元；丙要10.01元，共500股。下一步，你要买900股，每股最多付10.01元。','先猜一下：900股会分别买到谁的？'],
+  ['你买到了900股','先买甲的300股，再买乙的400股，最后按10.01元买丙的200股。','共花9,002元；丙还剩300股等待成交。'],
+  ['另一位买家只买到一部分','另一位买家也愿意付10.01元，想买500股。但卖家只剩300股，所以先成交300股，还有200股没买到。','只成交一部分，就叫“部分成交”；未成交的200股留在买方队列里。'],
+  ['撤掉没买到的200股','这位买家取消了剩余200股的请求。已经成交的300股不会被撤回。','撤单只处理未成交的余量。']
+];
+function table(heads,rows){return '<div class="table-wrap"><table><thead><tr>'+heads.map(x=>'<th>'+x+'</th>').join('')+'</tr></thead><tbody>'+rows.map(row=>'<tr>'+row.map(x=>'<td>'+x+'</td>').join('')+'</tr>').join('')+'</tbody></table></div>';}
+function showDemo(){const i=Number(el('demoRange').value),d=DATA.demo[i],e=explanations[i];el('demoIndex').textContent=(i+1)+' / '+DATA.demo.length;el('demoTitle').textContent=e[0];el('demoText').textContent=e[1];el('demoTakeaway').textContent=e[2];el('demoPrev').disabled=i===0;el('demoNext').disabled=i===DATA.demo.length-1;el('demoOrders').innerHTML=d.orders.length?table(['谁的订单','想做什么','还剩多少'],d.orders.map(o=>[names[o.oid],(o.side==='B'?'买入':'卖出')+' · '+money(o.price)+'元',fmt(o.qty)+'股'])):'现在没有等待成交的订单。';el('demoFills').innerHTML=d.fills.length?table(['谁向谁买','成交价格','数量'],d.fills.map(t=>[names[t.buy]+'向'+names[t.sell]+'买',money(t.price)+'元',fmt(t.qty)+'股'])):'这一步还没有成交。';}
+el('demoRange').addEventListener('input',showDemo);
+el('demoPrev').onclick=()=>{el('demoRange').value=Math.max(0,Number(el('demoRange').value)-1);showDemo();};
+el('demoNext').onclick=()=>{el('demoRange').value=Math.min(DATA.demo.length-1,Number(el('demoRange').value)+1);showDemo();};showDemo();
+function convertBP(){const amount=el('principal').valueAsNumber,bp=el('basisPoints').valueAsNumber;el('bpResult').textContent=Number.isFinite(amount)&&Number.isFinite(bp)&&amount>=0?fmt(amount)+'元 × '+bp+' bp = '+(amount*bp/10000).toLocaleString('zh-CN',{maximumFractionDigits:4})+'元':'请填写有效数字，交易金额不能为负数。';}
+el('principal').addEventListener('input',convertBP);el('basisPoints').addEventListener('input',convertBP);convertBP();
+</script>
+</body></html>

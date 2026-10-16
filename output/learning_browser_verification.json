@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-16",
+  "page": "report.html",
+  "description": "简明学习讲义的浏览器检查；旧版 browser_verification.json 对应现保留为 technical_report.html 的详细报告。",
+  "preview": "Temporary loopback-only HTTP preview of the output directory",
+  "checks": {
+    "title_and_five_step_reading_path_visible": true,
+    "desktop_layout_visually_checked": true,
+    "desktop_horizontal_overflow": false,
+    "buy_900_fills": "300 at 10.00 + 400 at 10.00 + 200 at 10.01; total 9002 yuan",
+    "partial_fill_remainder": "200 shares waiting",
+    "cancel_removes_remainder_and_disables_next": true,
+    "bp_conversion": "20000 yuan * -5 bp = -10 yuan",
+    "quiz_answer_expands": "10000 yuan * 5 bp = 5 yuan",
+    "browser_console_errors": [],
+    "regenerated_count_text_confirmed": true
+  }
+}

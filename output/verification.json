@@ -1,0 +1,10 @@
+{
+  "unit_tests": 18,
+  "unit_tests_passed": true,
+  "symbols_verified": 50,
+  "signal_rows_verified": 11749,
+  "snapshot_csv_rows_verified": 239807,
+  "no_future_signal": true,
+  "csv_summary_consistent": true,
+  "html_payload_valid": true
+}

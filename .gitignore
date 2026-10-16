@@ -1,0 +1,9 @@
+__pycache__/
+.venv/
+*.parquet
+data/
+output_smoke/
+sse50_20260923/
+.env
+*.pem
+*.key

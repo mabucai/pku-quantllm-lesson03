@@ -1,0 +1,12 @@
+{
+  "date": "2026-10-15",
+  "browser": "Codex in-app browser",
+  "homepage_visually_checked": true,
+  "matching_step_4_checked": "buy 900: 300 at 10.00 + 400 at 10.00 + 200 at 10.01",
+  "symbol_switch_checked": "688981",
+  "replay_step_checked": "09:31:01.000, BizIndex 1040681, 20 depth rows",
+  "fee_slider_checked": "20.0 bp, afternoon paper result -27.153 bp",
+  "console_errors_observed": 0,
+  "final_report_reload_checked": true,
+  "scope": "Desktop visual inspection and three primary interaction flows; mobile layout was not separately tested."
+}
